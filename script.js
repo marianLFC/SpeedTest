@@ -1,20 +1,33 @@
+function getFakeSpeed(max, min) {
+    return (Math.random() * (max - min) + min).toFixed(2);
+}
+
 document.getElementById('start-button').addEventListener('click', function() {
     const downloadElement = document.getElementById('download-speed');
     const uploadElement = document.getElementById('upload-speed');
 
-    // Simulating the speed test
-    downloadElement.textContent = 'Checking download speed...';
-    setTimeout(function() {
-        // Fake download speed test result
-        let downloadSpeed = (Math.random() * 100 + 10).toFixed(2);
+    // Start real-time download speed update
+    let downloadSpeed = 0;
+    let downloadInterval = setInterval(() => {
+        downloadSpeed = getFakeSpeed(100, 10);
         downloadElement.textContent = `Avg Download Speed: ${downloadSpeed} Mbps`;
+    }, 1000);
 
-        // Start upload speed test after download test
-        uploadElement.textContent = 'Checking upload speed...';
-        setTimeout(function() {
-            // Fake upload speed test result
-            let uploadSpeed = (Math.random() * 50 + 5).toFixed(2);
+    // Stop updating download speed after 15 seconds and start upload speed test
+    setTimeout(() => {
+        clearInterval(downloadInterval);
+
+        // Start real-time upload speed update
+        let uploadSpeed = 0;
+        let uploadInterval = setInterval(() => {
+            uploadSpeed = getFakeSpeed(50, 5);
             uploadElement.textContent = `Avg Upload Speed: ${uploadSpeed} Mbps`;
-        }, 5000); // Simulating a 5 second delay for upload test
-    }, 15000); // Simulating a 15 second delay for download test
+        }, 1000);
+
+        // Stop updating upload speed after 10 seconds
+        setTimeout(() => {
+            clearInterval(uploadInterval);
+        }, 10000); // Upload speed test for 10 seconds
+
+    }, 15000); // Download speed test for 15 seconds
 });
