@@ -21,7 +21,7 @@ body {
 
 .logo {
     width: 150px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     transition: transform 0.3s ease-in-out;
 }
 
@@ -38,6 +38,7 @@ body {
     font-size: 18px;
     border-radius: 50px;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-left: -20px; /* Shift the button a bit to the left */
 }
 
 #start-button:hover {
@@ -80,6 +81,7 @@ footer {
     font-size: 16px;
     color: #ffffff;
     transition: color 0.3s ease;
+    text-decoration: none;
 }
 
 .footer-text:hover {
